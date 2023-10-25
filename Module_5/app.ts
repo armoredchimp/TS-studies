@@ -1,50 +1,57 @@
-class Derpartment {
-  // private name: string = "Default";
-  private employees: string[] = [];
-  constructor(private readonly id: string, public name: string) {
-    // this.name = n;
+// interface Person {
+//   name: string;
+//   age: number;
+
+//   greet(phrase: string): void;
+// }
+
+// let user1: Person;
+
+// user1 = {
+//   name: "Max",
+//   age: 30,
+//   greet(phrase: string) {
+//     console.log(phrase + "" + this.name);
+//   },
+// };
+
+interface AddFn {
+  (a: number, b: number): number;
+}
+// type AddFn = (a: number, b: number) => number;
+
+let add: AddFn;
+
+add = (n1: number, n2: number) => {
+  return n1 + n2;
+};
+
+interface Named {
+  readonly name: string;
+}
+
+interface Greetable extends Named {
+  // readonly name: string; // can add readonly to interfaces, not public or private. readonly = set once and can't be changed after
+
+  greet(phrase: string): void;
+}
+
+class Person implements Greetable {
+  // classes can implement 2 or more interfaces
+  name: string;
+  age = 30;
+  constructor(n: string) {
+    this.name = n;
   }
 
-  describe(this: Derpartment) {
-    console.log("Derpatment" + this.id + this.name);
-  }
-
-  addEmployee(employee: string) {
-    this.employees.push(employee);
-  }
-
-  printEmployeeInfo() {
-    console.log(this.employees.length);
-    console.log(this.employees);
+  greet(phrase: string) {
+    console.log(phrase + "" + this.name);
   }
 }
 
-class ITDerpartment extends Derpartment {
-  admins: string[];
-  constructor(id: string, admins: string[]) {
-    super(id, "IT");
-    this.admins = admins;
-  }
-}
-class AccountingDerpartment extends Derpartment {
-  constructor(id: string, private reports: string[]) {
-    super(id, "Accounting");
-  }
+let user1: Greetable;
 
-  addReport(text: string) {
-    this.reports.push(text);
-  }
-  getReports() {
-    console.log(this.reports);
-  }
-}
-const dept1 = new Derpartment("1", "Dept1");
+user1 = new Person("Max");
 
-dept1.addEmployee("bill");
-dept1.addEmployee("sally");
-
-dept1.describe();
-
-const dept1Copy = { name: "s", describe: dept1.describe };
-// dept1Copy.describe();
-console.log(dept1);
+user1.greet("Hi there, it is I");
+console.log(user1);

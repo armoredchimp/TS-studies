@@ -24,12 +24,34 @@ type Numeric = number | boolean;
 
 type Universal = Combinable & Numeric;
 
-function add(a1: Combinable, b1: Combinable) {
+
+function add(a1: string, b1: string)
+function add(a1: number, b1: number): number
+function add(a1: Combinable, b1: Combinable): Combinable {
   if (typeof a1 === 'string' || typeof b1 === 'string') {
     return a1.toString() + b1.toString();
   }
-  return;
+  return a1 + b1
 }
+
+const result = add('Max', 'Schwarz');
+result.split(' ')
+
+const fetchedData = {
+  id: 'u1',
+  name: 'Jeb',
+  job: { title: 'CEO', description: 'JebCo' }
+}
+
+// console.log(fetchedData.job && fetchedData.job.title) Traditional JS method
+console.log(fetchedData?.job?.title) // 'CEO' if fetchedData and job exist
+
+const userInput = null;
+
+const storedData = userInput ?? 'DEFAULT'; //Nullish Coalescing: if null or undefined, use fallback ('DEFAULT') 
+
+
+
 
 type UnknownEmployee = Employee | Admin;
 
@@ -104,7 +126,21 @@ moveAnimal({ type: 'bird', flyingSpeed: 10 });
 
 
 ////// TYPE CASTING
-const userInputElement = document.getElementById('user-input')! as HTMLInputElement;
+// const userInputElement = document.getElementById('user-input')! as HTMLInputElement;
 // const userInputElement = <HTMLInputElement>document.getElementById('user-input') same thing as above
+const userInputElement = document.getElementById('user-input')
 
-userInputElement.value = 'Hi there!';
+
+if (userInputElement) {
+  (userInputElement as HTMLInputElement).value = 'Hi there!';
+}
+
+interface ErrorContainer {
+  id: string; // must adhere to the parameters 'string' in this case
+  [key: string]: string;
+}
+
+const errorBag: ErrorContainer = {
+  id: 'Fail',
+  email: 'support@email.com'
+}

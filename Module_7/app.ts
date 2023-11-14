@@ -39,7 +39,7 @@ function extractAndConvert<T extends object, U extends keyof T>(obj: T, key: U) 
 
 extractAndConvert({ name: 'Jim' }, 'name');
 
-class DataStorage<T extends string | number | boolean> { //primitive types only to avoid having to do the object nonsense below
+class DataStorage<T extends string | number | boolean> {
   private data: T[] = [];
 
   addItem(item: T) {
@@ -71,3 +71,20 @@ numberStorage.addItem(24)
 // objectStorage.removeItem(maxStorage)
 // console.log(objectStorage.getItems()) // the object being removed must be declared and referenced first like this, because otherwise objects as reference types would just remove the last object regardless of the data being passed in
 
+
+interface CourseGoal {
+  title: string;
+  description: string;
+  completeUntil: Date;
+}
+
+function createCourseGoal(title: string, description: string, date: Date): CourseGoal {
+  let courseGoal: Partial<CourseGoal> = {};
+  courseGoal.title = title;
+  courseGoal.description = description;
+  courseGoal.completeUntil = date;
+  return courseGoal as CourseGoal;
+}
+
+const names: Readonly<string[]> = ['Jim', 'Louis'];
+// names.push('Steve'); push gets an error because of the readonly

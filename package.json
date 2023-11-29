@@ -11,5 +11,8 @@
   "license": "ISC",
   "prettier": {
     "singleQuote": true
+  },
+  "devDependencies": {
+    "typescript": "^5.3.2"
   }
 }

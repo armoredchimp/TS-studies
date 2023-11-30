@@ -56,6 +56,7 @@ function Log2(target: any, name: string, descriptor: PropertyDescriptor) {
   console.log(target)
   console.log(name)
   console.log(descriptor)
+
 }
 
 //Method Decorator
@@ -98,3 +99,30 @@ class Product {
     return this.price * (1 + tax);
   }
 }
+
+function autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
+  const originalMethod = descriptor.value;
+  const adjDescriptor: PropertyDescriptor = {
+    configurable: true,
+    enumerable: false,
+    get() {
+      const boundFn = originalMethod.bind(this);
+      return boundFn;
+    }
+  }
+  return adjDescriptor;
+}
+
+class Printer {
+  message = 'This works';
+
+  @autobind //for when the event listener messes with .this and you need to use bind, this accomplishes the same thing but is re-usable
+  showMessage() {
+    console.log(this.message)
+  }
+}
+
+const p = new Printer()
+
+const button = document.querySelector('button')
+button?.addEventListener('click', p.showMessage)

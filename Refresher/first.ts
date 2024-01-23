@@ -8,18 +8,47 @@ console.log(a)
 
 type job = 'Engineer' | 'Garbage Man'
 
+
+
 interface Person {
   firstName: string,
   lastName: string,
-  job: job
+  job?: job
+  isVisitor?: boolean
 }
 
-function generateEmail(input: Person): string {
-  return `${input.firstName}.${input.lastName}`
+function generateEmail(input: Person, force?: boolean): string | undefined {
+  if (input.isVisitor && !force) {
+    return undefined
+  } else {
+    return `${input.firstName}.${input.lastName}`
+  }
 }
 
-console.log(generateEmail({
+function isPerson(potentialPerson: any): boolean {
+  if ('firstName' in potentialPerson && 'lastName' in potentialPerson) {
+    return true
+  } else {
+    return false
+  }
+}
+
+function printEmailIfPerson(potentialPerson: any): void {
+  if (isPerson(potentialPerson)) {
+    console.log(generateEmail(potentialPerson))
+  } else {
+    console.log('Not a person')
+  }
+}
+
+printEmailIfPerson({
   firstName: 'John',
-  lastName: 'Doe',
-  job: 'Garbage Man'
-}))
+  lastName: 'Doe'
+})
+
+// console.log(generateEmail({
+//   firstName: 'John',
+//   lastName: 'Doe',
+//   job: 'Garbage Man',
+//   isVisitor: true
+// }, true))

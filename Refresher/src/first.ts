@@ -46,6 +46,8 @@ printEmailIfPerson({
   lastName: 'Doe'
 })
 
+
+
 // console.log(generateEmail({
 //   firstName: 'John',
 //   lastName: 'Doe',

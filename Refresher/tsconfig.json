@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "lib": ["DOM", "ES6"],
+    "target": "ES2021",
+    "rootDir": "src",
+    "outDir": "dist"
+  }
+}

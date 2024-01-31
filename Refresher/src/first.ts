@@ -1,3 +1,5 @@
+import { Iserver } from './third';
+
 var a: string = 'hi';
 
 var arr: string[] = []

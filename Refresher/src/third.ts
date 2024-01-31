@@ -1,4 +1,6 @@
-interface Iserver {
+import { Comp1 } from './data/comp1/comp1';
+
+export interface Iserver {
   startServer(): void
   stopServer(): void
 }
